@@ -28,7 +28,7 @@ when 'debian'
   apt_repository 'sensu' do
     uri node['uchiwa']['apt_repo_url']
     key "#{node['uchiwa']['apt_repo_url']}/pubkey.gpg"
-    distribution node['lsb']['codename']
+    distribution node["uchiwa"]["apt_repo_codename"] || node['lsb']['codename']
     components node['uchiwa']['use_unstable_repo'] ? ['unstable'] : ['main']
     only_if { node['uchiwa']['add_repo'] }
   end
